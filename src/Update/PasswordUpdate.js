@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 import "./Reset.css";
-import { auth, db, passwordUpdate } from "./firebase";
+import { auth, db, passwordUpdate } from "../Firebase/firebase";
 
 function PasswordUpdate() {
     const [user, loading, error] = useAuthState(auth);

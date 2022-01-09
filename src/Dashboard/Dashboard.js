@@ -3,8 +3,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import "./Dashboard.css";
-import { auth, db, logout } from "./firebase";
-import logo from './icon.png'
+import { auth, db, logout } from "../Firebase/firebase";
+import logo from '../icon.png'
 
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);

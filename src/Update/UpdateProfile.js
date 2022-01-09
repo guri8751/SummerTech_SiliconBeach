@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import "./Reset.css";
-import { auth, db, updateData, logout } from "./firebase";
+import { auth, db, updateData, logout } from "../Firebase/firebase";
 
 function UpdateProfile() {
     const [user, loading, error] = useAuthState(auth);

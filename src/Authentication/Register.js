@@ -4,9 +4,9 @@ import { Link, useHistory } from "react-router-dom";
 import {
   auth,
   registerWithEmailAndPassword
-} from "./firebase";
+} from "../Firebase/firebase";
 import './Credential.css';
-import logo from './icon.png'
+import logo from '../icon.png'
 
 function Register() {
   const [email, setEmail] = useState("");

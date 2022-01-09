@@ -1,11 +1,11 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Login from "./Login";
-import Register from "./Register";
-import Reset from "./Reset";
-import Dashboard from "./Dashboard";
-import UpdateProfile from "./UpdateProfile";
-import PasswordUpdate from "./PasswordUpdate";
+import Login from "./Authentication/Login";
+import Register from "./Authentication/Register";
+import Reset from "./Update/Reset";
+import Dashboard from "./Dashboard/Dashboard";
+import UpdateProfile from "./Update/UpdateProfile";
+import PasswordUpdate from "./Update/PasswordUpdate";
 
 function App() {
   return (
