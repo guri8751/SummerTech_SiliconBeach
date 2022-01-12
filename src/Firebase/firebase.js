@@ -50,9 +50,21 @@ const registerWithEmailAndPassword = async (name, email, password, address, city
   }
 };
 
+const addService = async (userId, title, description, cost) => {
+  try {
+    db.collection("services").doc(userId).set({
+      title: title,
+      description: description,
+      cost: cost,
+      uid: userId,
+    });
+  }
+  catch (err) {
+    alert(err.message);
+  }
+}
+
 const updateData = async (userId, name, address, city, abn) => {
-  console.log("Function run")
-  console.log(name);
   try {
     await db.collection("users").doc(userId).update({
       name: name,
@@ -65,6 +77,21 @@ const updateData = async (userId, name, address, city, abn) => {
     console.error(err);
     alert(err.message)
   }
+}
+
+const uploadPhoto = async (file, user, setLoading) => {
+  var storageRef = firebase.storage().ref();
+  var fileRef = storageRef.child(user.uid + '.png');
+
+  setLoading(true);
+  fileRef.put(file).then((snapshot) => {
+    console.log('File Uploaded')
+  })
+  const photoURL = await fileRef.getDownloadURL();
+  console.log(photoURL);
+  user.updateProfile({ photoURL: photoURL });
+  setLoading(false);
+  alert("File Uploaded");
 }
 
 const passwordUpdate = async (newPass) => {
@@ -97,6 +124,8 @@ export {
   signInWithEmailAndPassword,
   registerWithEmailAndPassword,
   sendPasswordResetEmail,
+  addService,
+  uploadPhoto,
   updateData,
   passwordUpdate,
   logout,

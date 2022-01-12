@@ -1,20 +1,23 @@
-.dashboard {
+/* .dashboard {
   height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  
   background-color: #52ACFF;
   background-color: #FBDA61;
   background-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
   
 
-}
+} */
 
 .image{
   animation: 1.5s ease-out 0.4s 1 slideInFromBottom;
     animation-fill-mode: both;
+}
+
+.avatar{
+  width: 200px;
 }
 
 .title{
@@ -74,10 +77,7 @@
   font-weight: 600;
 }
 
-.link{
-  text-decoration: none;
-  color: #fff;
-}
+
 
 .dashboard__btn {
   padding: 10px;
@@ -94,6 +94,270 @@
   cursor: pointer;
 }
 
-.dashboard div {
-  margin-top: 7px;
+
+
+
+
+h1 {
+  color: #4158d0;
+  font-size: 2.5rem;
+  font-weight: 600;
 }
+
+.games h1{
+  font-size: 4rem;
+  opacity: 0.8;
+}
+
+.user{
+  display: flex;
+  flex-direction: column;
+}
+
+.user img {
+  width: 300px;
+}
+
+h2,
+p {
+  color: #4158d0;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+h3 {
+  color: #4158d0;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.main-div{
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  background-color: #4158d0;
+  background-image: linear-gradient(
+    43deg,
+    #4158d0 0%,
+    #c850c0 46%,
+    #ffcc70 100%
+  );
+  justify-content: center;
+  padding: 0px 200px;
+
+  /* background-color: #21d4fd;
+  background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%); */
+
+  display: flex;
+
+  
+}
+
+main {
+  font-family: "Poppins", sans-serif;
+  min-height: 80vh;
+  background-color: #4158d0;
+  background-image: linear-gradient(
+    43deg,
+    #4158d0 0%,
+    #c850c0 46%,
+    #ffcc70 100%
+  );
+
+  /* background-color: #21d4fd;
+  background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%); */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glass {
+  
+  min-height: 80vh;
+  display: flex;
+  width: 60%;
+  
+  border-radius: 2rem;
+  z-index: 3;
+  backdrop-filter: blur(2rem);
+}
+
+.circle1,
+.circle2 {
+  background: white;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.3)
+  );
+  height: 20rem;
+  width: 20rem;
+  position: absolute;
+  z-index: 2;
+  border-radius: 50%;
+}
+
+.circle1 {
+  top: 3%;
+  right: 12%;
+}
+
+.circle2 {
+  bottom: 3%;
+  left: 10%;
+}
+
+.dashboard {
+  height: 90vh;
+  width: 100vw;
+  flex: 1;
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  text-align: center;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.5)
+  );
+  border-radius: 2rem;
+}
+
+
+
+.link {
+  display: flex;
+  padding: 0rem 4rem;
+  align-items: center;
+}
+
+
+.games {
+  flex: 2;
+}
+
+.pro {
+  background-image: radial-gradient(
+    circle 300px at 8% 89.3%,
+    rgba(20, 157, 208, 1) 0%,
+    rgba(140, 63, 226, 1) 90%
+  );
+
+  border-radius: 2rem;
+  color: #fff;
+  padding: 1rem;
+
+  position: relative;
+}
+
+
+.pro img {
+  position: absolute;
+  top: -10%;
+  right: 10%;
+}
+
+.pro h2 {
+  width: 40%;
+}
+
+.status {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.status input {
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  border-radius: 0.4rem;
+  border: none;
+  width: 50%;
+  padding: 0.5rem;
+}
+
+.games {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  border-radius: 2rem;
+  padding: 2rem;
+  height: auto;
+  margin-top: 20px;
+}
+
+.card {
+  display: flex;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  margin: 2rem 0rem;
+  border-radius: 2rem;
+  padding: 1.5rem;
+  box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.2);
+  justify-content: space-between;
+}
+
+.button-link{
+  text-decoration: none;
+  color: #fff;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+
+.user-btn {background-image: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%)}
+.user-btn {
+   margin: 10px;
+   padding: 8px 20px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   font-size: 14px;
+    
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 10px;
+   display: block;
+   cursor: pointer;
+ }
+
+ .user-btn:hover {
+   background-position: right center; 
+   color: #fff;
+   text-decoration: none;
+ }
+ 
+
+ 
+
+
+
+@media (max-width: 1250px) {
+  .glass {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
