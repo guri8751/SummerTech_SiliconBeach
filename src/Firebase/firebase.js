@@ -1,6 +1,5 @@
 import firebase from "firebase";
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyB_iFkn66BYtysUTD3PGhaWJ8jwzeRhF9E",
   authDomain: "siliconebeach-development.firebaseapp.com",
@@ -52,11 +51,12 @@ const registerWithEmailAndPassword = async (name, email, password, address, city
 
 const addService = async (userId, title, description, cost) => {
   try {
-    db.collection("services").doc(userId).set({
+    await db.collection("services").doc(userId).set({
       title: title,
       description: description,
       cost: cost,
       uid: userId,
+      created: '100',
     });
   }
   catch (err) {

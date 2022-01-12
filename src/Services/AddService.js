@@ -1,26 +1,48 @@
 import React from 'react'
-import { useState } from 'react';
-import Modal from './UI/Modal.js';
+import { useState, useEffect } from 'react';
+import Modal from '../UI/modal.js';
 import { useAuthState } from "react-firebase-hooks/auth";
-import AddService from './Firebase/firebase.js'
-import { auth, db, logout, uploadPhoto } from "../Firebase/firebase";
+import { addService } from '../Firebase/firebase.js'
+import { auth, db } from "../Firebase/firebase";
+import './addService.css';
 
-function AddService() {
+function AddService({ onClose, open }) {
     const [user, loading, error] = useAuthState(auth);
     const [userId, setUserId] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [cost, setCost] = useState("");
 
-    setUserID(user?.uid);
+    const fetchUserData = async () => {
+        try {
+            const query = await db
+                .collection("users")
+                .where("uid", "==", user?.uid)
+                .get();
+            const data = await query.docs[0].data();
+            setUserId(user?.uid);
+
+        } catch (err) {
+            console.error(err);
+            alert("An error occured while fetching user data");
+        }
+    };
+
+    useEffect(() => {
+        if (loading) return;
+
+        fetchUserData();
+    }, [user, loading]);
+
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        AddService(userId, title, description, cost);
+        console.log(userId)
+
     }
     return (
-        <Modal modalLabel="Add Service" onClose={onClose} open={open}>
-            <form onSubmit={submitHandler} className="addTask" name="addTask">
+        <Modal modalLabel="Add A Service" onClose={onClose} open={open}>
+            <form onSubmit={submitHandler} className="addService" name="addService">
                 <input
                     type='text'
                     name='title'

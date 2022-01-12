@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import "./Dashboard.css";
 import { auth, db, logout, uploadPhoto } from "../Firebase/firebase";
+import ServiceList from "../Services/ServiceList";
 import logo from '../icon.png'
 import avatar from '../avatar.jpg'
 
@@ -11,7 +12,7 @@ function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
   const [photo, setPhoto] = useState(null);
-  const [photoURL, setPhotoURL] = useState("");
+  const [photoURL, setPhotoURL] = useState(avatar);
   const [address, setAddress] = useState("");
   const [buttonLoading, setButtonLoading] = useState(false);
   const [city, setCity] = useState("");
@@ -113,27 +114,8 @@ function Dashboard() {
       <div className="games">
         <div className="status">
           <h1>Services</h1>
-          <a className="user-btn add-service">+ Add A New Service</a>
         </div>
-        <div className="cards">
-          <div className="card">
-            <div className="card-info">
-              <h2>Assassins Creed Valhalla</h2>
-              <p>PS5 Version</p>
-            </div>
-            <h2 className="percentage">60%</h2>
-          </div>
-          <div className="card">
-
-            <div className="card-info">
-              <h2>Spiderman Miles Morales</h2>
-              <p>PS5 Version</p>
-
-            </div>
-            <h2 className="percentage">80%</h2>
-          </div>
-
-        </div>
+        <ServiceList />
       </div>
 
 
