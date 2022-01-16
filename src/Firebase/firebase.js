@@ -13,8 +13,6 @@ const app = firebase.initializeApp(firebaseConfig);
 const auth = app.auth();
 const db = app.firestore();
 
-let documentID = "";
-
 
 const signInWithEmailAndPassword = async (email, password) => {
   try {
@@ -56,7 +54,7 @@ const addService = async (userId, title, description, cost) => {
       description: description,
       cost: cost,
       uid: userId,
-      created: '100',
+      created: firebase.firestore.FieldValue.serverTimestamp(),
     });
   }
   catch (err) {

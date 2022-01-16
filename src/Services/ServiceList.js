@@ -1,18 +1,42 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { db } from "../Firebase/firebase";
+import { db, auth } from "../Firebase/firebase";
 import Service from "./Service";
+import { useAuthState } from "react-firebase-hooks/auth";
 import AddService from "./AddService";
 
 
 function ServiceList() {
+    const [user, loading, error] = useAuthState(auth);
     const [openAddModal, setOpenAddModal] = useState(false);
+    const [userId, setUserId] = useState("");
     const [services, setServices] = useState([]);
 
+    const fetchUserData = async () => {
+        try {
+            const query = await db
+                .collection("users")
+                .where("uid", "==", user?.uid)
+                .get();
+            const data = await query.docs[0].data();
+            setUserId(user?.uid);
+
+        } catch (err) {
+            console.error(err);
+            alert("An error occured while fetching user data");
+        }
+    };
+
     useEffect(() => {
-        db.collection('services').orderBy('created', 'desc')
+        if (loading) return;
+
+        fetchUserData();
+    }, [user, loading]);
+
+    useEffect(() => {
+        db.collection('services').where("companyID", "==", userId).orderBy("created", "desc")
             .onSnapshot((snapshot) => {
-                setServices(snapshot.doc.map(doc => ({
+                setServices(snapshot.docs.map(doc => ({
                     id: doc.id,
                     data: doc.data()
                 })))
@@ -24,38 +48,25 @@ function ServiceList() {
             <div className="service-conatiner">
                 <a onClick={() => setOpenAddModal(true)} className="user-btn add-service">+ Add A New Service</a>
                 <div className="services">
-                    {services.map((service) => {
+
+                    {services.map((service) => (
                         <Service
                             id={service.id}
-                            key={service.key}
+                            key={service.id}
                             title={service.data.title}
                             description={service.data.description}
-                            cost={service.data.cost} />
-                    })}
+                            cost={service.data.cost}
+                        />
+                    ))}
+
+
                 </div>
+
 
 
             </div>
 
-            <div className="cards">
-                <div className="card">
-                    <div className="card-info">
-                        <h2>Service 1</h2>
-                        <p>Service 1 Description</p>
-                    </div>
-                    <h2 className="percentage">$60</h2>
-                </div>
-                <div className="card">
 
-                    <div className="card-info">
-                        <h2>Service 2</h2>
-                        <p>Service 2 Description</p>
-
-                    </div>
-                    <h2 className="percentage">$80</h2>
-                </div>
-
-            </div>
 
             {openAddModal &&
                 <AddService onClose={() => setOpenAddModal(false)} open={openAddModal} />}

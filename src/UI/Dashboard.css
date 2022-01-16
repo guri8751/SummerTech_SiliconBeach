@@ -235,9 +235,7 @@ main {
 }
 
 
-.games {
-  flex: 2;
-}
+
 
 .pro {
   background-image: radial-gradient(
@@ -265,25 +263,14 @@ main {
 }
 
 .status {
-  margin-bottom: 3rem;
   text-align: center;
 }
 
-.status input {
-  background: linear-gradient(
-    to right bottom,
-    rgba(255, 255, 255, 0.7),
-    rgba(255, 255, 255, 0.3)
-  );
-  border-radius: 0.4rem;
-  border: none;
-  width: 50%;
-  padding: 0.5rem;
-}
 
 .games {
   
   display: flex;
+  flex:2;
   flex-direction: column;
   background: linear-gradient(
     to right bottom,
@@ -292,8 +279,9 @@ main {
   );
   border-radius: 2rem;
   padding: 2rem;
-  height: 75vh;
   margin-top: 20px;
+  margin-bottom: 40px;
+  
 }
 
 .card {

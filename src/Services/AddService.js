@@ -1,10 +1,11 @@
 import React from 'react'
+import firebase from "firebase";
 import { useState, useEffect } from 'react';
 import Modal from '../UI/modal.js';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { addService } from '../Firebase/firebase.js'
 import { auth, db } from "../Firebase/firebase";
-import './addService.css';
+import '../UI/addService.css';
 
 function AddService({ onClose, open }) {
     const [user, loading, error] = useAuthState(auth);
@@ -37,8 +38,19 @@ function AddService({ onClose, open }) {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        console.log(userId)
-
+        console.log(userId);
+        try {
+            await db.collection("services").doc().set({
+                title: title,
+                description: description,
+                cost: cost,
+                companyID: userId,
+                created: firebase.firestore.FieldValue.serverTimestamp(),
+            });
+            onClose()
+        } catch (err) {
+            alert(err)
+        }
     }
     return (
         <Modal modalLabel="Add A Service" onClose={onClose} open={open}>
@@ -48,17 +60,17 @@ function AddService({ onClose, open }) {
                     name='title'
                     onChange={(e) => setTitle(e.target.value.toUpperCase())}
                     value={title}
-                    placeholder='Enter Title' />
+                    placeholder='Enter Service Name' />
 
                 <input
                     type='number'
                     name='cost'
                     onChange={(e) => setCost(e.target.value)}
                     value={cost}
-                    placeholder='Enter Cost' />
+                    placeholder='Enter Service Cost' />
                 <textarea
                     onChange={(e) => setDescription(e.target.value)}
-                    placeholder='Enter service decription'
+                    placeholder='Enter Service Decription'
                     value={description}></textarea>
                 <button type='submit'>Done</button>
             </form>

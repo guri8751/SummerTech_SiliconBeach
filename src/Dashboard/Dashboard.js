@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import "./Dashboard.css";
+import "../UI/Dashboard.css";
 import { auth, db, logout, uploadPhoto } from "../Firebase/firebase";
 import ServiceList from "../Services/ServiceList";
 import logo from '../icon.png'
 import avatar from '../avatar.jpg'
 
+
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
+
   const [name, setName] = useState("");
   const [photo, setPhoto] = useState(null);
   const [photoURL, setPhotoURL] = useState(avatar);
@@ -46,6 +48,8 @@ function Dashboard() {
     }
   };
 
+
+
   useEffect(() => {
     if (loading) return;
     if (!user) return history.replace("/");
@@ -54,6 +58,8 @@ function Dashboard() {
     }
     fetchUserData();
   }, [user, loading]);
+
+
 
   return (
     <div className="main-div">
@@ -114,6 +120,7 @@ function Dashboard() {
       <div className="games">
         <div className="status">
           <h1>Services</h1>
+          <a className="user-btn add-service">My Network</a>
         </div>
         <ServiceList />
       </div>

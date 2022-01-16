@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import "./Reset.css";
+import "../UI/Reset.css";
 import { auth, db, updateData, logout } from "../Firebase/firebase";
 
 function UpdateProfile() {
