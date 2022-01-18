@@ -7,14 +7,16 @@ import { auth, db, logout, uploadPhoto } from "../Firebase/firebase";
 import ServiceList from "../Services/ServiceList";
 import logo from '../icon.png'
 import avatar from '../avatar.jpg'
+import UpdatePicture from './UpdatePicture';
+import company_icon from '../company_icon.png'
 
 
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
-
+  const [openAddModal, setOpenAddModal] = useState(false);
   const [name, setName] = useState("");
   const [photo, setPhoto] = useState(null);
-  const [photoURL, setPhotoURL] = useState(avatar);
+  const [photoURL, setPhotoURL] = useState(company_icon);
   const [address, setAddress] = useState("");
   const [buttonLoading, setButtonLoading] = useState(false);
   const [city, setCity] = useState("");
@@ -55,6 +57,7 @@ function Dashboard() {
     if (!user) return history.replace("/");
     if (user && user.photoURL) {
       setPhotoURL(user.photoURL);
+
     }
     fetchUserData();
   }, [user, loading]);
@@ -63,47 +66,27 @@ function Dashboard() {
 
   return (
     <div className="main-div">
-      {/* <img className="image" src={logo} />
-      <div className="dashboard__container">
-        <h1>User Details</h1>
-        <input onChange={handleChange} type="file"></input>
-        <button disabled={buttonLoading || !photo} onClick={handleClick}>Upload</button>
-        <img src={photoURL} alt="Profile" className="avatar" />
-        <div className="details"><span className="heading">Email: </span>{user?.email}</div>
-        <div className="details"><span className="heading">Name: </span>{name}</div>
-        <div className="details"><span className="heading">Address: </span>{address}</div>
-        <div className="details"><span className="heading">City: </span>{city}</div>
-        <div className="details"><span className="heading">ABN: </span>{abn}</div>
-        <button className="dashboard__btn btn1"><Link className="link" to="/updateprofile">Update Profile</Link></button>
-        <button className="dashboard__btn btn2"><Link className="link" to="/passwordupdate">Update Password</Link></button>
-        <button className="dashboard__btn btn3" onClick={logout}>
-          Logout
-        </button>
-      </div> */}
-
 
       <div className="dashboard">
         <div className="user">
           <img src={photoURL} alt="Profile" className="avatar" />
 
-          <a className="user-btn update-pic">Update Picture</a>
+          <a onClick={() => setOpenAddModal(true)} className="user-btn add-service">Update Picture</a>
+          {openAddModal &&
+            <UpdatePicture onClose={() => setOpenAddModal(false)} open={openAddModal} />}
           <h1>{name}</h1>
         </div>
         <div className="links">
           <div className="link">
-            <img src="./images/steam.png" alt="" />
             <h2>Email: {user?.email}</h2>
           </div>
           <div className="link">
-            <img src="./images/upcoming.png" alt="" />
             <h2>Address: {address}</h2>
           </div>
           <div className="link">
-            <img src="./images/library.png" alt="" />
             <h2>City: {city}</h2>
           </div>
           <div className="link">
-            <img src="./images/library.png" alt="" />
             <h2>ABN: {abn}</h2>
           </div>
           <div className="buttons">
@@ -117,13 +100,18 @@ function Dashboard() {
 
       </div>
 
-      <div className="games">
+      <div className="Services">
+        <div>
+          <a className="user-btn add-service"><Link className="button-link" to="/companies">All Companies</Link></a>
+          <a className="user-btn add-service"><Link className="button-link" to="/network">My Network</Link></a>
+        </div>
         <div className="status">
           <h1>Services</h1>
-          <a className="user-btn add-service">My Network</a>
         </div>
         <ServiceList />
       </div>
+
+
 
 
     </div>

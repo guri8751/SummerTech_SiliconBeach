@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { auth, signInWithEmailAndPassword } from "../Firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import "./Credential.css";
+import "../UI/Credential.css";
 import logo from '../icon.png'
 
 function Login() {

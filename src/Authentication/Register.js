@@ -5,7 +5,7 @@ import {
   auth,
   registerWithEmailAndPassword
 } from "../Firebase/firebase";
-import './Credential.css';
+import '../UI/Credential.css';
 import logo from '../icon.png'
 
 function Register() {

@@ -8,6 +8,7 @@ import AddService from "./AddService";
 
 function ServiceList() {
     const [user, loading, error] = useAuthState(auth);
+    const [photoURL, setPhotoURL] = useState("");
     const [openAddModal, setOpenAddModal] = useState(false);
     const [userId, setUserId] = useState("");
     const [services, setServices] = useState([]);
@@ -20,6 +21,7 @@ function ServiceList() {
                 .get();
             const data = await query.docs[0].data();
             setUserId(user?.uid);
+            setPhotoURL(user?.photoURL);
 
         } catch (err) {
             console.error(err);
@@ -34,7 +36,7 @@ function ServiceList() {
     }, [user, loading]);
 
     useEffect(() => {
-        db.collection('services').where("companyID", "==", userId).orderBy("created", "desc")
+        db.collection('services')
             .onSnapshot((snapshot) => {
                 setServices(snapshot.docs.map(doc => ({
                     id: doc.id,

@@ -6,6 +6,9 @@ import Reset from "./Update/Reset";
 import Dashboard from "./Dashboard/Dashboard";
 import UpdateProfile from "./Update/UpdateProfile";
 import PasswordUpdate from "./Update/PasswordUpdate";
+import Companies from "./Companies/Companies";
+import UpdatePicture from "./Dashboard/UpdatePicture";
+import MyNetwork from "./Companies/MyNetwork";
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/updateprofile" component={UpdateProfile} />
           <Route exact path="/passwordupdate" component={PasswordUpdate} />
+          <Route exact path="/companies" component={Companies} />
+          <Route exact path="/updatepicture" component={UpdatePicture} />
+          <Route exact path="/network" component={MyNetwork} />
         </Switch>
       </Router>
     </div>

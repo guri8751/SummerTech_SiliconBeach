@@ -32,6 +32,7 @@ const registerWithEmailAndPassword = async (name, email, password, address, city
       name,
       authProvider: "local",
       email,
+      image: "",
       address,
       city,
       abn,
@@ -89,6 +90,11 @@ const uploadPhoto = async (file, user, setLoading) => {
   console.log(photoURL);
   user.updateProfile({ photoURL: photoURL });
   setLoading(false);
+
+  db.collection("users").doc(user.uid).update({
+    image: photoURL
+  });
+
   alert("File Uploaded");
 }
 

@@ -1,0 +1,25 @@
+.upload-button {
+    background-image: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%)
+}
+.upload-button{
+   margin: 20px;
+   padding: 8px 20px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   font-size: 14px;
+    
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 10px;
+   display: block;
+   cursor: pointer;
+ }
+
+ .upload-button:hover {
+   background-position: right center; 
+   color: #fff;
+   text-decoration: none;
+ }
+ 

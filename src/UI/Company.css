@@ -1,0 +1,38 @@
+.company-data img{
+    max-width: 150px;
+}
+
+.company-body{
+    min-width: 250px;
+}
+
+.img-container{
+    min-height: 150px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    
+}
+
+.company{
+   margin-right: 120px;
+    margin-bottom: 100px;
+   box-sizing: border-box;
+   justify-content: center;
+   align-items: center;
+   padding: 35px 14px 35px 14px;
+   box-shadow: 0px 1px 30px 0px rgba(0, 0, 0, 0.25);
+   background-color: #ffffff;
+   overflow: visible;
+   border-radius: 20px;
+   border: 0px solid #222;
+   cursor: pointer;
+}
+
+.buttons-container{
+    justify-content: center;
+}
+
+.company-logo{
+    max-width: 150px;
+}

@@ -1,0 +1,17 @@
+{/* <img className="image" src={logo} />
+      <div className="dashboard__container">
+        <h1>User Details</h1>
+        <input onChange={handleChange} type="file"></input>
+        <button disabled={buttonLoading || !photo} onClick={handleClick}>Upload</button>
+        <img src={photoURL} alt="Profile" className="avatar" />
+        <div className="details"><span className="heading">Email: </span>{user?.email}</div>
+        <div className="details"><span className="heading">Name: </span>{name}</div>
+        <div className="details"><span className="heading">Address: </span>{address}</div>
+        <div className="details"><span className="heading">City: </span>{city}</div>
+        <div className="details"><span className="heading">ABN: </span>{abn}</div>
+        <button className="dashboard__btn btn1"><Link className="link" to="/updateprofile">Update Profile</Link></button>
+        <button className="dashboard__btn btn2"><Link className="link" to="/passwordupdate">Update Password</Link></button>
+        <button className="dashboard__btn btn3" onClick={logout}>
+          Logout
+        </button>
+      </div> */}

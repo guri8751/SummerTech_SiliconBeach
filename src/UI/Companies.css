@@ -1,0 +1,21 @@
+
+.Companies{
+    min-height: 100vh;
+    width: 100vw;
+    text-align: center;
+    background-color: #21D4FD;
+  background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+}
+
+
+
+.Companies h1{
+    color: #fff;
+    font-size: 4rem;
+}
+
+.companies-list{
+  display: flex;
+  flex-basis: 25%;
+  margin: 0px 40px;
+}
