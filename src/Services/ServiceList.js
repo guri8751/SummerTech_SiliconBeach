@@ -57,6 +57,7 @@ function ServiceList() {
                             key={service.id}
                             title={service.data.title}
                             description={service.data.description}
+                            advertise={service.data.advertise}
                             cost={service.data.cost}
                         />
                     ))}

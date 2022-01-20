@@ -6,7 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import EditService from './EditService';
 
 
-function Service({ id, title, description, cost }) {
+function Service({ id, advertise, title, description, cost }) {
     const [editOpen, setEditOpen] = useState(false);
 
     const handleClose = () => {
@@ -31,6 +31,7 @@ function Service({ id, title, description, cost }) {
                 <div>
                     <h2>{title}</h2>
                     <p>{description}</p>
+                    <p>Advertise to other companies: {advertise}</p>
                 </div>
                 <div>
                     <h2>${cost}</h2>

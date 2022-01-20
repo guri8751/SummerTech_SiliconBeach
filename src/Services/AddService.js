@@ -12,6 +12,7 @@ function AddService({ onClose, open }) {
     const [userId, setUserId] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [advertise, setAdvertise] = useState("");
     const [cost, setCost] = useState("");
 
     const fetchUserData = async () => {
@@ -44,6 +45,7 @@ function AddService({ onClose, open }) {
                 title: title,
                 description: description,
                 cost: cost,
+                advertise: advertise,
                 companyID: userId,
                 created: firebase.firestore.FieldValue.serverTimestamp(),
             });
@@ -68,6 +70,12 @@ function AddService({ onClose, open }) {
                     onChange={(e) => setCost(e.target.value)}
                     value={cost}
                     placeholder='Enter Service Cost' />
+                <input
+                    type='text'
+                    name='advertise'
+                    onChange={(e) => setAdvertise(e.target.value)}
+                    value={advertise}
+                    placeholder='Do you want to Advertise it to other companies?' />
                 <textarea
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder='Enter Service Decription'

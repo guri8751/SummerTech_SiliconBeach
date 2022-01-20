@@ -17,5 +17,6 @@
 .companies-list{
   display: flex;
   flex-basis: 25%;
+  justify-content: center;
   margin: 0px 40px;
 }

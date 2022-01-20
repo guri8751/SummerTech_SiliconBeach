@@ -36,7 +36,7 @@ function Companies() {
     }
 
     useEffect(() => {
-        db.collection('users').where("uid", "!=", userId)
+        db.collection('users').where("uid", "==", userId)
             .onSnapshot((snapshot) => {
                 setCompanies(snapshot.docs.map(doc => ({
                     id: doc.id,

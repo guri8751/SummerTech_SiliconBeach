@@ -8,6 +8,8 @@ function MyNetwork() {
     const [user, loading, error] = useAuthState(auth);
     const [userId, setUserId] = useState("");
     const [network, setNetwork] = useState([]);
+    const [companies, setCompanies] = useState([]);
+
 
     const fetchUserData = async () => {
         try {
@@ -33,15 +35,38 @@ function MyNetwork() {
         console.log("Company Clicked")
     }
 
+    useEffect(() => {
+        network.map((company) => {
+            let array = []
+            db.collection('users').where("uid", "==", company)
+                .get().then((querySnapshot) => {
+
+                    querySnapshot.forEach((doc) => {
+
+                        array.push(doc.data())
+
+                    })
+                    setCompanies(array)
+
+
+                })
+
+
+        })
+
+    }, [])
+
 
     return (
         <div className="Companies">
             <h1>COMPANIES</h1>
+            {network.length}
+            {companies.length}
             <div className="companies-list" >
 
-                {network.map((company) => (
+                {companies.map((company) => (
                     <Company
-                        id={company.id}
+                        id={company.data.uid}
                         key={company.id}
                         image={company.data.image}
                         name={company.data.name}
