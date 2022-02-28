@@ -6,12 +6,16 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import AddService from "./AddService";
 
 
-function ServiceList({ id, dashboard }) {
+function OtherServiceList({ id, dashboard }) {
     const [user, loading, error] = useAuthState(auth);
     const [photoURL, setPhotoURL] = useState("");
     const [openAddModal, setOpenAddModal] = useState(false);
     const [userId, setUserId] = useState("");
-    const [services, setServices] = useState([]);
+    const [otherServicesArr, setOtherServicesArr] = useState([]);
+    const [otherServicesData, setOtherServicesData] = useState([]);
+    const [network, setNetwork] = useState([]);
+    const [city, setCity] = useState("");
+
 
     const fetchUserData = async () => {
         try {
@@ -21,7 +25,7 @@ function ServiceList({ id, dashboard }) {
                 .get();
             const data = await query.docs[0].data();
             setUserId(user?.uid);
-            setPhotoURL(user?.photoURL);
+            setOtherServicesArr(data.otherServices);
 
         } catch (err) {
             console.error(err);
@@ -29,51 +33,49 @@ function ServiceList({ id, dashboard }) {
         }
     };
 
-    const fetchServices = useCallback(async () => {
-        try {
-            db.collection('services').where("companyID", "==", id)
-                .onSnapshot((snapshot) => {
-                    setServices(snapshot.docs.map(doc => ({
-                        id: doc.id,
-                        data: doc.data()
-                    })))
+    const getSharedServices = useCallback(async () => {
+        if (otherServicesArr.length > 0) {
+            const data = db.collection("services").where("serviceID", "in", otherServicesArr);
+            data.get().then((query) => {
+                query.forEach((doc) => {
+                    console.log(doc.data(), 'doc');
+                    setOtherServicesData(otherServicesData => [...otherServicesData, doc.data()]);
                 })
+            });
         }
-        catch (err) {
-            console.error(err);
-            alert("An error occured while fetching service data");
-        }
-    })
+    }, [otherServicesArr])
+
 
     useEffect(() => {
         if (loading) return;
-
         fetchUserData();
+
     }, [user, loading]);
 
     useEffect(() => {
-        fetchServices();
-    })
+        getSharedServices();
+    }, [otherServicesArr])
 
 
+
+    console.log(otherServicesData, "HEYYY")
 
     return (
         <div className="service-list">
             <div className="service-conatiner">
-                {dashboard && <a onClick={() => setOpenAddModal(true)} className="user-btn add-service">+ Add A New Service</a>}
 
                 <div className="services">
 
-                    {services.map((service) => (
+                    {otherServicesData.map((service) => (
                         <Service
                             id={service.id}
                             key={service.id}
-                            title={service.data.title}
-                            description={service.data.description}
-                            advertise={service.data.advertise}
-                            serviceID={service.id}
-                            cost={service.data.cost}
+                            title={service.title}
+                            description={service.description}
+                            advertise={service.advertise}
+                            cost={service.cost}
                             dashboard={dashboard}
+
                         />
                     ))}
 
@@ -84,13 +86,8 @@ function ServiceList({ id, dashboard }) {
 
             </div>
 
-
-
-            {openAddModal &&
-                <AddService id={userId} onClose={() => setOpenAddModal(false)} open={openAddModal} />}
-
         </div>
     )
 }
 
-export default ServiceList;
+export default OtherServiceList;

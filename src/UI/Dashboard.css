@@ -108,9 +108,7 @@ h3 {
   opacity: 0.8;
 }
 
-.main-div{
-  font-family: "Poppins", sans-serif;
-  min-height: 100vh;
+.outer-div{
   background-color: #4158d0;
   background-image: linear-gradient(
     43deg,
@@ -118,6 +116,12 @@ h3 {
     #c850c0 46%,
     #ffcc70 100%
   );
+}
+
+.main-div{
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  
   justify-content: center;
   padding: 0px 200px;
   display: flex;

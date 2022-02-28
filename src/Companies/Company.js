@@ -1,15 +1,20 @@
 import React from 'react'
 import company_icon from '../company_icon.png'
 import "../UI/Company.css"
+import "../UI/modal"
+import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "firebase";
 import { auth, db } from "../Firebase/firebase";
+import IndividualCompany from '../MyNetwork/IndividualCompany';
 
 
-export default function Company({ id, city, image, name, email }) {
+export default function Company({ id, city, image, name, email, inAllCompanies, inNetwork }) {
     const [user, loading, error] = useAuthState(auth);
     const [userId, setUserId] = useState("");
+    const [network, setNetwork] = useState([]);
+    const [compnayOpen, setCompanyOpen] = useState(false);
 
     const fetchUserData = async () => {
         try {
@@ -19,6 +24,7 @@ export default function Company({ id, city, image, name, email }) {
                 .get();
             const data = await query.docs[0].data();
             setUserId(user?.uid);
+            setNetwork(data.network);
 
         } catch (err) {
             console.error(err);
@@ -32,6 +38,18 @@ export default function Company({ id, city, image, name, email }) {
         });
 
     }
+
+    const handleClose = () => {
+        setCompanyOpen(false);
+    }
+
+    const removeFromNetwork = () => {
+        db.collection("users").doc(userId).update({
+            network: firebase.firestore.FieldValue.arrayRemove(id)
+        });
+    }
+
+
 
     useEffect(() => {
         if (loading) return;
@@ -50,13 +68,31 @@ export default function Company({ id, city, image, name, email }) {
                     <h2>{name}</h2>
                     <p>{email}</p>
                     <p>{city}</p>
+
                 </div>
                 <div>
-                    <div className='buttons-container'>
+                    {inAllCompanies && [network.includes(id) ? (<div className='buttons-container'>
+                        <button className='button'> ✓ Added</button>
+                    </div>) : (<div className='buttons-container'>
                         <button onClick={addToNetwork} className='button'>Add to Network</button>
-                    </div>
+                    </div>)]}
+
+                    {inNetwork && <a className="user-btn"><Link className="button-link" to="/individualcompany">View Info</Link></a>}
+
+
+                    {inNetwork && <div className='buttons-container'>
+                        <button onClick={removeFromNetwork} className='button'>Remove from Network</button>
+                    </div>}
+
+
                 </div>
             </div>
+
+            {compnayOpen &&
+                <IndividualCompany
+                    id={id}
+                    open={compnayOpen}
+                    onClose={handleClose} />}
         </div>
     )
 }

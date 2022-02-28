@@ -10,6 +10,7 @@ import '../UI/addService.css';
 function AddService({ onClose, open }) {
     const [user, loading, error] = useAuthState(auth);
     const [userId, setUserId] = useState("");
+    const [companyName, setCompanyName] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [advertise, setAdvertise] = useState("");
@@ -23,6 +24,7 @@ function AddService({ onClose, open }) {
                 .get();
             const data = await query.docs[0].data();
             setUserId(user?.uid);
+            setCompanyName(data.name);
 
         } catch (err) {
             console.error(err);
@@ -38,17 +40,18 @@ function AddService({ onClose, open }) {
 
 
     const submitHandler = async (e) => {
-        e.preventDefault();
-        console.log(userId);
         try {
-            await db.collection("services").doc().set({
+            var docref = db.collection("services").doc();
+            docref.set({
                 title: title,
                 description: description,
                 cost: cost,
                 advertise: advertise,
                 companyID: userId,
-                created: firebase.firestore.FieldValue.serverTimestamp(),
-            });
+                companyName: companyName,
+                serviceID: docref.id,
+                created: firebase.firestore.FieldValue.serverTimestamp()
+            })
             onClose()
         } catch (err) {
             alert(err)

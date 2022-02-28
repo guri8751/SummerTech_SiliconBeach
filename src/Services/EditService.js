@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { db } from "../Firebase/firebase";
 import Modal from '../UI/modal.js';
 
-export default function EditService({ id, toEditTitle, toEditAdvertise, toEditCost, toEditDescription, open, onClose }) {
+export default function EditService({ serviceID, toEditTitle, toEditAdvertise, toEditCost, toEditDescription, open, onClose }) {
 
     const [title, setTitle] = useState(toEditTitle);
     const [cost, setCost] = useState(toEditCost);
@@ -12,7 +12,7 @@ export default function EditService({ id, toEditTitle, toEditAdvertise, toEditCo
 
     const handleEdit = async (e) => {
         e.preventDefault();
-        var docRef = db.collection("services").doc(id);
+        var docRef = db.collection("services").doc(serviceID);
         try {
             await docRef.update({
                 title: title,

@@ -4,12 +4,9 @@ import { auth, db } from "../Firebase/firebase";
 import '../UI/Service.css'
 import firebase from "firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import EditService from './EditService';
-import ViewService from "./ViewService";
+import ViewService from "../Services/ViewService";
 
-
-
-function Service({ serviceID, id, advertise, title, description, cost, dashboard, home }) {
+function HomeService({ serviceID, id, title, description, cost }) {
     const [editOpen, setEditOpen] = useState(false);
     const [ServiceID, setServiceID] = useState(serviceID);
     const [companyName, setCompanyName] = useState("");
@@ -86,41 +83,14 @@ function Service({ serviceID, id, advertise, title, description, cost, dashboard
                 <div>
                     <h2>{title}</h2>
                     <p>{ServiceID}</p>
-                    {!home && <p>{description}</p>}
-                    {dashboard && <p>Advertise to other companies: {advertise}</p>}
+                    <p>{description}</p>
 
                 </div>
                 <div>
                     <h2>${cost}</h2>
-                    {dashboard && <div className='buttons-container'>
-                        <a
-                            className='button'
-                            onClick={() => setEditOpen(true)}>
-                            Edit
-                        </a>
-                        <a className='button' onClick={handleDelete}>Delete</a>
-                    </div>}
-
-                    {!dashboard && [(otherServices.includes(serviceID)) ?
-                        (<div>
-                            <a className='button' onClick={removeService} >Remove Service</a></div>) :
-                        <a onClick={addToCompany} className='button' >Add Service</a>]}
-
-                    {home && <a className='button' onClick={() => setViewOpen(true)} >View Service</a>}
-
+                    <a className='button' onClick={() => setViewOpen(true)} >View Service</a>
                 </div>
-
-
             </div>
-
-            {editOpen &&
-                <EditService
-                    onClose={handleEditClose}
-                    toEditTitle={title}
-                    toEditDescription={description}
-                    toEditCost={cost}
-                    open={editOpen}
-                    serviceID={serviceID} />}
 
             {viewOpen &&
                 <ViewService
@@ -139,4 +109,4 @@ function Service({ serviceID, id, advertise, title, description, cost, dashboard
     )
 }
 
-export default Service;
+export default HomeService;

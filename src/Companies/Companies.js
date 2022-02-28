@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import "../UI/Companies.css"
 import { useState, useEffect } from 'react';
 import { db, auth } from "../Firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Company from './Company';
+
 
 function Companies() {
     const [user, loading, error] = useAuthState(auth);
@@ -25,24 +26,37 @@ function Companies() {
         }
     };
 
+
+
+    const handleClick = () => {
+        console.log("Company Clicked")
+    }
+
+    const fetchCompanies = useCallback(async () => {
+        try {
+            db.collection('users').where("uid", "!=", userId)
+                .onSnapshot((snapshot) => {
+                    setCompanies(snapshot.docs.map(doc => ({
+                        id: doc.id,
+                        data: doc.data()
+                    })))
+                })
+        }
+
+        catch (err) {
+            console.error(err);
+            alert("An error occured while fetching service data");
+        }
+    })
+
     useEffect(() => {
         if (loading) return;
 
         fetchUserData();
     }, [user, loading]);
 
-    const handleClick = () => {
-        console.log("Company Clicked")
-    }
-
     useEffect(() => {
-        db.collection('users').where("uid", "==", userId)
-            .onSnapshot((snapshot) => {
-                setCompanies(snapshot.docs.map(doc => ({
-                    id: doc.id,
-                    data: doc.data()
-                })))
-            })
+        fetchCompanies();
     }, [])
 
     return (
@@ -57,6 +71,8 @@ function Companies() {
                         image={company.data.image}
                         name={company.data.name}
                         city={company.data.city}
+                        inAllCompanies={true}
+                        inNetwork={false}
                         email={company.data.email} onClick={handleClick} />
                 ))}
 

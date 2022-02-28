@@ -1,16 +1,17 @@
 import React from 'react'
 import { useState, useEffect, useCallback } from 'react';
 import { db, auth } from "../Firebase/firebase";
-import Service from "./Service";
+import HomeService from "./HomeService";
 import { useAuthState } from "react-firebase-hooks/auth";
-import AddService from "./AddService";
+import '../UI/Home.css'
 
 
-function ServiceList({ id, dashboard }) {
+function Home({ id, dashboard }) {
+
     const [user, loading, error] = useAuthState(auth);
     const [photoURL, setPhotoURL] = useState("");
-    const [openAddModal, setOpenAddModal] = useState(false);
     const [userId, setUserId] = useState("");
+    const [openViewModal, setOpenViewModal] = useState(false);
     const [services, setServices] = useState([]);
 
     const fetchUserData = async () => {
@@ -25,13 +26,13 @@ function ServiceList({ id, dashboard }) {
 
         } catch (err) {
             console.error(err);
-            alert("An error occured while fetching user data");
+
         }
     };
 
     const fetchServices = useCallback(async () => {
         try {
-            db.collection('services').where("companyID", "==", id)
+            db.collection('services').where("companyID", "!=", id)
                 .onSnapshot((snapshot) => {
                     setServices(snapshot.docs.map(doc => ({
                         id: doc.id,
@@ -54,26 +55,21 @@ function ServiceList({ id, dashboard }) {
     useEffect(() => {
         fetchServices();
     })
-
-
-
     return (
-        <div className="service-list">
+        <div className="home-div">
+            <h1 className="heading">News Feed</h1>
             <div className="service-conatiner">
-                {dashboard && <a onClick={() => setOpenAddModal(true)} className="user-btn add-service">+ Add A New Service</a>}
-
-                <div className="services">
-
+                <div className="services-home">
                     {services.map((service) => (
-                        <Service
+                        <HomeService
                             id={service.id}
                             key={service.id}
                             title={service.data.title}
                             description={service.data.description}
                             advertise={service.data.advertise}
-                            serviceID={service.id}
                             cost={service.data.cost}
                             dashboard={dashboard}
+                            home={true}
                         />
                     ))}
 
@@ -85,12 +81,8 @@ function ServiceList({ id, dashboard }) {
             </div>
 
 
-
-            {openAddModal &&
-                <AddService id={userId} onClose={() => setOpenAddModal(false)} open={openAddModal} />}
-
         </div>
     )
 }
 
-export default ServiceList;
+export default Home;
