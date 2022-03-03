@@ -23,7 +23,7 @@ export default function EditService({ serviceID, toEditTitle, toEditAdvertise, t
             onClose()
         }
         catch (err) {
-            alert(err);
+            console.log(err);
         }
     }
     return (

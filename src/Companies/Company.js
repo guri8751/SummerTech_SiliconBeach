@@ -14,7 +14,10 @@ export default function Company({ id, city, image, name, email, inAllCompanies, 
     const [user, loading, error] = useAuthState(auth);
     const [userId, setUserId] = useState("");
     const [network, setNetwork] = useState([]);
-    const [compnayOpen, setCompanyOpen] = useState(false);
+    const [companyOpen, setCompanyOpen] = useState(false);
+
+    const [companyID, setCompanyID] = useState(id);
+
 
     const fetchUserData = async () => {
         try {
@@ -28,7 +31,7 @@ export default function Company({ id, city, image, name, email, inAllCompanies, 
 
         } catch (err) {
             console.error(err);
-            alert("An error occured while fetching user data");
+
         }
     };
 
@@ -36,6 +39,7 @@ export default function Company({ id, city, image, name, email, inAllCompanies, 
         db.collection("users").doc(userId).update({
             network: firebase.firestore.FieldValue.arrayUnion(id)
         });
+        fetchUserData();
 
     }
 
@@ -47,6 +51,7 @@ export default function Company({ id, city, image, name, email, inAllCompanies, 
         db.collection("users").doc(userId).update({
             network: firebase.firestore.FieldValue.arrayRemove(id)
         });
+        fetchUserData();
     }
 
 
@@ -77,7 +82,7 @@ export default function Company({ id, city, image, name, email, inAllCompanies, 
                         <button onClick={addToNetwork} className='button'>Add to Network</button>
                     </div>)]}
 
-                    {inNetwork && <a className="user-btn"><Link className="button-link" to="/individualcompany">View Info</Link></a>}
+                    {inNetwork && <a className="user-btn"><Link className="button-link" to={{ pathname: "/individualcompany", state: { companyID } }}>View Info</Link></a>}
 
 
                     {inNetwork && <div className='buttons-container'>
@@ -88,10 +93,10 @@ export default function Company({ id, city, image, name, email, inAllCompanies, 
                 </div>
             </div>
 
-            {compnayOpen &&
+            {companyOpen &&
                 <IndividualCompany
                     id={id}
-                    open={compnayOpen}
+                    open={companyOpen}
                     onClose={handleClose} />}
         </div>
     )

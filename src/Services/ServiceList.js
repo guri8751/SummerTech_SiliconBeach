@@ -25,7 +25,7 @@ function ServiceList({ id, dashboard }) {
 
         } catch (err) {
             console.error(err);
-            alert("An error occured while fetching user data");
+
         }
     };
 
@@ -41,7 +41,7 @@ function ServiceList({ id, dashboard }) {
         }
         catch (err) {
             console.error(err);
-            alert("An error occured while fetching service data");
+
         }
     })
 

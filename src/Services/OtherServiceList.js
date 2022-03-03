@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect, useCallback } from 'react';
 import { db, auth } from "../Firebase/firebase";
-import Service from "./Service";
+import SharedService from "./SharedService";
 import { useAuthState } from "react-firebase-hooks/auth";
 import AddService from "./AddService";
 
@@ -29,7 +29,7 @@ function OtherServiceList({ id, dashboard }) {
 
         } catch (err) {
             console.error(err);
-            alert("An error occured while fetching user data");
+
         }
     };
 
@@ -67,7 +67,7 @@ function OtherServiceList({ id, dashboard }) {
                 <div className="services">
 
                     {otherServicesData.map((service) => (
-                        <Service
+                        <SharedService
                             id={service.id}
                             key={service.id}
                             title={service.title}

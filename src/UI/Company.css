@@ -17,6 +17,7 @@
 .company{
    margin-right: 120px;
     margin-bottom: 100px;
+    max-width: 90%;
    box-sizing: border-box;
    justify-content: center;
    align-items: center;

@@ -8,7 +8,7 @@ import { auth, db } from "../Firebase/firebase";
 import '../UI/addService.css';
 import AddService from './AddService.js';
 
-function ViewService({ senderCompany, senderCompanyName, serviceID, title, cost, description, onClose, open }) {
+function ViewService({ senderCompany, dashboard, senderCompanyName, serviceID, title, cost, description, onClose, open }) {
 
     const [receiverCompany, setReceiverCompany] = useState("");
     const [requestStatus, setRequestStatus] = useState("");
@@ -23,7 +23,7 @@ function ViewService({ senderCompany, senderCompanyName, serviceID, title, cost,
             setReceiverCompany(data.companyID);
         } catch (err) {
             console.error(err);
-            alert("An error occured while fetching user data");
+
         }
     };
 
@@ -37,7 +37,7 @@ function ViewService({ senderCompany, senderCompanyName, serviceID, title, cost,
             setRequestStatus(data.status);
         } catch (err) {
             console.error(err);
-            alert("An error occured while fetching user data");
+
         }
     };
 
@@ -58,7 +58,7 @@ function ViewService({ senderCompany, senderCompanyName, serviceID, title, cost,
         }
         catch (err) {
             console.error(err);
-            alert("An error occured while fetching service data");
+
         }
     }
 
@@ -73,13 +73,13 @@ function ViewService({ senderCompany, senderCompanyName, serviceID, title, cost,
             <div>
                 <p>Title: {title}</p>
 
-                <p>Cost: {cost}</p>
+                <p>Cost: ${cost}</p>
 
                 <p>{requestStatus}</p>
 
                 <p>Description: {description}</p>
 
-                <button onClick={AddRequest}>Request Service</button>
+                {!dashboard && <button onClick={AddRequest}>Request Service</button>}
             </div>
         </Modal>
     )

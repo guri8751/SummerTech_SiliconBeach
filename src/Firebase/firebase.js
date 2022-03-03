@@ -19,7 +19,7 @@ const signInWithEmailAndPassword = async (email, password) => {
     await auth.signInWithEmailAndPassword(email, password);
   } catch (err) {
     console.error(err);
-    alert(err.message);
+
   }
 };
 
@@ -36,6 +36,8 @@ const registerWithEmailAndPassword = async (name, email, password, address, city
       address,
       city,
       abn,
+      network: [],
+      otherServices: []
     })
       .then(function (docRef) {
         db.collection("users").where("uid", "==", user.uid).add({
@@ -44,7 +46,7 @@ const registerWithEmailAndPassword = async (name, email, password, address, city
       });
   } catch (err) {
     console.error(err);
-    alert(err.message);
+
   }
 };
 
@@ -59,7 +61,7 @@ const addService = async (userId, title, description, cost) => {
     });
   }
   catch (err) {
-    alert(err.message);
+
   }
 }
 
@@ -74,7 +76,7 @@ const updateData = async (userId, name, address, city, abn) => {
   }
   catch (err) {
     console.error(err);
-    alert(err.message)
+
   }
 }
 
@@ -95,7 +97,7 @@ const uploadPhoto = async (file, user, setLoading) => {
     image: photoURL
   });
 
-  alert("File Uploaded");
+
 }
 
 const passwordUpdate = async (newPass) => {
@@ -104,7 +106,7 @@ const passwordUpdate = async (newPass) => {
   }
   catch (err) {
     console.error(err);
-    alert(err.message)
+
   }
 }
 
@@ -114,7 +116,7 @@ const sendPasswordResetEmail = async (email) => {
     alert("Password reset link sent!");
   } catch (err) {
     console.error(err);
-    alert(err.message);
+
   }
 };
 

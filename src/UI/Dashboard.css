@@ -46,6 +46,7 @@
   text-align: center;
   background-color: #fff;
   padding: 30px;
+  border-width: 20px;
   border-radius: 10px;
   box-shadow: 0px 1px 30px 0px rgba(140, 92, 92, 0.50);
 }
@@ -76,9 +77,14 @@
 }
 
 h1 {
-  color: #4158d0;
+  color: #000;
   font-size: 2.5rem;
   font-weight: 600;
+}
+
+h1:hover{
+  color: #74bfe9;
+  cursor: pointer;
 }
 
 .Services h1{
@@ -92,12 +98,14 @@ h1 {
 }
 
 .user img {
-  max-width: 200px;
+  max-width: 170px;
+  align-self: center;
+  justify-self: center;
 }
 
 h2,
 p {
-  color: #4158d0;
+  color: #000;
   font-weight: 600;
   opacity: 0.8;
 }
@@ -109,23 +117,25 @@ h3 {
 }
 
 .outer-div{
-  background-color: #4158d0;
-  background-image: linear-gradient(
-    43deg,
-    #4158d0 0%,
-    #c850c0 46%,
-    #ffcc70 100%
-  );
+  background-color: #fff;
 }
 
 .main-div{
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
-  
+  border: 5px solid #fff;
   justify-content: center;
   padding: 0px 200px;
   display: flex;
   
+}
+
+.main-nav{
+  border-bottom: 2px #000 solid;
+}
+
+.main-nav h1{
+  font-weight: 900;
 }
 
 main {
@@ -159,6 +169,7 @@ main {
   flex: 1;
   display: flex;
   margin-top: 20px;
+  border: 2px #000 solid;
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -169,7 +180,7 @@ main {
     rgba(255, 255, 255, 0.9),
     rgba(255, 255, 255, 0.5)
   );
-  border-radius: 2rem;
+  border-radius: 1rem;
 }
 
 
@@ -193,11 +204,12 @@ main {
     rgba(255, 255, 255, 0.7),
     rgba(255, 255, 255, 0.3)
   );
-  border-radius: 2rem;
+  
   padding: 2rem;
+  border-radius: 10px;
   margin-top: 20px;
   margin-bottom: 40px;
-  
+  border: 2px #000 solid;
 }
 
 .card {
@@ -216,7 +228,7 @@ main {
 
 .button-link{
   text-decoration: none;
-  color: #fff;
+  color: #000;
 }
 
 .buttons{
@@ -224,7 +236,7 @@ main {
   justify-content: space-evenly;
 }
 
-.user-btn {background-image: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%)}
+
 .user-btn {
    margin: 10px;
    padding: 8px 20px;
@@ -232,9 +244,11 @@ main {
    text-transform: uppercase;
    transition: 0.5s;
    font-size: 14px;
-    
-   background-size: 200% auto;
-   color: white;            
+   color: #000;
+   border: 2px #000 solid;
+   box-shadow: 0 3px 10px rgb(0 0 0 / 0.7);
+
+   background-size: 200% auto;           
    box-shadow: 0 0 20px #eee;
    border-radius: 10px;
    display: block;
@@ -243,8 +257,8 @@ main {
 
  .user-btn:hover {
    background-position: right center; 
-   color: #fff;
    text-decoration: none;
+   background-color: #74bfe9;
  }
  
 @media (max-width: 1250px) {

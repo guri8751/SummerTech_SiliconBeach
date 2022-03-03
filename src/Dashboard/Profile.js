@@ -44,6 +44,7 @@ function Profile() {
                 .where("uid", "==", user?.uid)
                 .get();
             const data = await query.docs[0].data();
+
             setUserId(user?.uid);
             setName(data.name);
             setAddress(data.address);
@@ -51,7 +52,7 @@ function Profile() {
             setAbn(data.abn);
         } catch (err) {
             console.error(err);
-            alert("An error occured while fetching user data");
+
         }
     };
 
@@ -108,7 +109,7 @@ function Profile() {
 
                 <div className="Services">
                     <div>
-                        <a className="user-btn add-service"><Link className="button-link" to="/companies">All Companies</Link></a>
+                        <a className="user-btn"><Link className="button-link" to="/companies">All Companies</Link></a>
                         <a className="user-btn add-service"><Link className="button-link" to="/network">My Network</Link></a>
                         <a className="user-btn add-service"><Link className="button-link" to="/home">Home</Link></a>
                     </div>

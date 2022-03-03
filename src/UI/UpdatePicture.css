@@ -1,5 +1,5 @@
 .upload-button {
-    background-image: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%)
+    color:#000;
 }
 .upload-button{
    margin: 20px;
@@ -8,18 +8,20 @@
    text-transform: uppercase;
    transition: 0.5s;
    font-size: 14px;
-    
+    border: 2px solid #000;
    background-size: 200% auto;
-   color: white;            
+   color: #000;            
    box-shadow: 0 0 20px #eee;
    border-radius: 10px;
    display: block;
    cursor: pointer;
  }
+ 
 
  .upload-button:hover {
    background-position: right center; 
-   color: #fff;
+   
    text-decoration: none;
+   background-color: #74bfe9;
  }
  

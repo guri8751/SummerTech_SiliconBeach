@@ -4,9 +4,12 @@ import { auth, db } from "../Firebase/firebase";
 import '../UI/Service.css'
 import firebase from "firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import ViewService from "../Services/ViewService";
+import EditService from './EditService';
+import ViewService from "./ViewService";
 
-function HomeService({ serviceID, id, title, description, cost }) {
+
+
+function SharedService({ serviceID, id, title, description, cost, dashboard, home }) {
     const [editOpen, setEditOpen] = useState(false);
     const [ServiceID, setServiceID] = useState(serviceID);
     const [companyName, setCompanyName] = useState("");
@@ -23,11 +26,11 @@ function HomeService({ serviceID, id, title, description, cost }) {
                 .get();
             const data = await query.docs[0].data();
             setUserId(user?.uid);
-            setCompanyName(data.name);
+            setCompanyName(data.name)
             setOtherServices(data.otherServices)
 
         } catch (err) {
-            console.error(err);
+            console.log(err);
 
         }
     };
@@ -84,12 +87,20 @@ function HomeService({ serviceID, id, title, description, cost }) {
                     <h2>{title}</h2>
                     <p>{ServiceID}</p>
                     <p>{description}</p>
-
                 </div>
                 <div>
                     <h2>${cost}</h2>
-                    <a className='button' onClick={() => setViewOpen(true)} >View Service</a>
+                    <div className='buttons-container'>
+                        <a
+                            className='button'
+                            onClick={() => setViewOpen(true)}>
+                            View
+                        </a>
+                        <a className='button' onClick={handleDelete}>Delete</a>
+                    </div>
                 </div>
+
+
             </div>
 
             {viewOpen &&
@@ -101,7 +112,8 @@ function HomeService({ serviceID, id, title, description, cost }) {
                     open={viewOpen}
                     senderCompanyName={companyName}
                     senderCompany={userId}
-                    serviceID={id} />}
+                    serviceID={id}
+                    dashboard={true} />}
 
         </div>
 
@@ -109,4 +121,4 @@ function HomeService({ serviceID, id, title, description, cost }) {
     )
 }
 
-export default HomeService;
+export default SharedService;

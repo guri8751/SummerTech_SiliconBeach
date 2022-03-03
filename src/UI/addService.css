@@ -23,7 +23,7 @@
   
 
 
-  .addService button {background-image: linear-gradient(to right, #DA22FF 0%, #9733EE  51%, #DA22FF  100%)}
+  
 .addService button {
    margin: 10px;
    padding: 8px 20px;
@@ -31,9 +31,9 @@
    text-transform: uppercase;
    transition: 0.5s;
    font-size: 14px;
-    
-   background-size: 200% auto;
-   color: white;            
+   color: #000;
+  
+   background-size: 200% auto;      
    box-shadow: 0 0 20px #eee;
    border-radius: 10px;
    display: block;
@@ -42,8 +42,9 @@
 
  .addService button:hover {
    background-position: right center; 
-   color: #fff;
+   color: #000;
    text-decoration: none;
+   background-color: #74bfe9;
  }
   
   .addService textarea {
@@ -57,10 +58,4 @@
     outline: none;
   }
   
-  .addService button:hover {
-    background-color: hsl(210, 12%, 25%);
-  }
   
-  .addService button:active {
-    background-color: hsl(210, 12%, 15%);
-  }

@@ -13,6 +13,7 @@ function Home({ id, dashboard }) {
     const [userId, setUserId] = useState("");
     const [openViewModal, setOpenViewModal] = useState(false);
     const [services, setServices] = useState([]);
+    const [network, setNetwork] = useState([]);
 
     const fetchUserData = async () => {
         try {
@@ -23,6 +24,7 @@ function Home({ id, dashboard }) {
             const data = await query.docs[0].data();
             setUserId(user?.uid);
             setPhotoURL(user?.photoURL);
+            setNetwork(data.network)
 
         } catch (err) {
             console.error(err);
@@ -30,31 +32,45 @@ function Home({ id, dashboard }) {
         }
     };
 
-    const fetchServices = useCallback(async () => {
-        try {
-            db.collection('services').where("companyID", "!=", id)
-                .onSnapshot((snapshot) => {
-                    setServices(snapshot.docs.map(doc => ({
-                        id: doc.id,
-                        data: doc.data()
-                    })))
+
+
+    // const fetchServices = useCallback(async () => {
+    //     try {
+    //         db.collection('services').where("companyID", "!=", id)
+    //             .onSnapshot((snapshot) => {
+    //                 setServices(snapshot.docs.map(doc => ({
+    //                     id: doc.id,
+    //                     data: doc.data()
+    //                 })))
+    //             })
+    //     }
+    //     catch (err) {
+    //         console.error(err);
+
+    //     }
+    // })
+
+    const getServices = useCallback(async () => {
+        if (network.length > 0) {
+            const data = db.collection("services").where("companyID", "in", network);
+            data.get().then((query) => {
+                query.forEach((doc) => {
+                    console.log(doc.data(), 'doc');
+                    setServices(services => [...services, doc.data()]);
                 })
+            });
         }
-        catch (err) {
-            console.error(err);
-            alert("An error occured while fetching service data");
-        }
-    })
+    }, [network])
 
     useEffect(() => {
         if (loading) return;
-
         fetchUserData();
     }, [user, loading]);
 
     useEffect(() => {
-        fetchServices();
-    })
+        getServices();
+    }, [network])
+
     return (
         <div className="home-div">
             <h1 className="heading">News Feed</h1>
@@ -64,11 +80,11 @@ function Home({ id, dashboard }) {
                         <HomeService
                             id={service.id}
                             key={service.id}
-                            title={service.data.title}
-                            description={service.data.description}
-                            advertise={service.data.advertise}
-                            cost={service.data.cost}
-                            dashboard={dashboard}
+                            title={service.title}
+                            description={service.description}
+                            advertise={service.advertise}
+                            cost={service.cost}
+                            dashboard={false}
                             home={true}
                         />
                     ))}

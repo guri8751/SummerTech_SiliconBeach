@@ -32,7 +32,7 @@ function Dashboard() {
       setUserId(user?.uid);
     } catch (err) {
       console.error(err);
-      alert("An error occured while fetching user data");
+
     }
   };
 

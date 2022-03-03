@@ -23,7 +23,7 @@ function PasswordUpdate() {
 
         } catch (err) {
             console.error(err);
-            alert("An error occured while fetching user data");
+
         }
     };
 

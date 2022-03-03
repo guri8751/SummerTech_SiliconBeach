@@ -28,7 +28,7 @@ function AddService({ onClose, open }) {
 
         } catch (err) {
             console.error(err);
-            alert("An error occured while fetching user data");
+
         }
     };
 
@@ -54,7 +54,7 @@ function AddService({ onClose, open }) {
             })
             onClose()
         } catch (err) {
-            alert(err)
+            console.log(err)
         }
     }
     return (
@@ -63,7 +63,7 @@ function AddService({ onClose, open }) {
                 <input
                     type='text'
                     name='title'
-                    onChange={(e) => setTitle(e.target.value.toUpperCase())}
+                    onChange={(e) => setTitle(e.target.value)}
                     value={title}
                     placeholder='Enter Service Name' />
 

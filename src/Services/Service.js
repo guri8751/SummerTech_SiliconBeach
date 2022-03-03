@@ -26,12 +26,12 @@ function Service({ serviceID, id, advertise, title, description, cost, dashboard
                 .get();
             const data = await query.docs[0].data();
             setUserId(user?.uid);
-            setCompanyName(data.name);
+            setCompanyName(data.name)
             setOtherServices(data.otherServices)
 
         } catch (err) {
             console.error(err);
-            alert("An error occured while fetching user data");
+
         }
     };
 
@@ -49,7 +49,7 @@ function Service({ serviceID, id, advertise, title, description, cost, dashboard
             db.collection("services").doc(serviceID).delete()
         }
         catch (err) {
-            alert(err);
+            console.log(err);
         }
 
     }
@@ -62,7 +62,7 @@ function Service({ serviceID, id, advertise, title, description, cost, dashboard
             alert("Service Added!")
         }
         catch (err) {
-            alert(err)
+            console.log(err)
         }
 
     }
@@ -85,7 +85,6 @@ function Service({ serviceID, id, advertise, title, description, cost, dashboard
             <div className='service__body'>
                 <div>
                     <h2>{title}</h2>
-                    <p>{ServiceID}</p>
                     {!home && <p>{description}</p>}
                     {dashboard && <p>Advertise to other companies: {advertise}</p>}
 

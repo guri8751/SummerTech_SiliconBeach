@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../Firebase/firebase";
 import { useState, useEffect } from 'react';
-import Company from './Company';
+import MyNetworkCompany from './MyNetworkCompany';
 
 function MyNetwork() {
     const [user, loading, error] = useAuthState(auth);
@@ -61,7 +61,7 @@ function MyNetwork() {
             <div className="companies-list" >
 
                 {companies.map((company) => (
-                    <Company
+                    <MyNetworkCompany
                         id={company.uid}
                         key={company.uid}
                         image={company.image}

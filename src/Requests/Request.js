@@ -37,7 +37,7 @@ function Request({ requestStatus, serviceID, id, senderCompanyID, senderCompanyN
             alert("Service Added!")
         }
         catch (err) {
-            alert(err)
+            console.log(err)
         }
 
     }
@@ -53,7 +53,7 @@ function Request({ requestStatus, serviceID, id, senderCompanyID, senderCompanyN
             alert("Service Retracted!")
         }
         catch (err) {
-            alert(err)
+            console.log(err)
         }
 
     }
@@ -65,7 +65,7 @@ function Request({ requestStatus, serviceID, id, senderCompanyID, senderCompanyN
             })
         }
         catch (err) {
-            alert(err)
+            console.log(err)
         }
 
     }

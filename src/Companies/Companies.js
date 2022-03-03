@@ -22,7 +22,7 @@ function Companies() {
 
         } catch (err) {
             console.error(err);
-            alert("An error occured while fetching user data");
+
         }
     };
 
@@ -45,7 +45,6 @@ function Companies() {
 
         catch (err) {
             console.error(err);
-            alert("An error occured while fetching service data");
         }
     })
 
@@ -57,7 +56,7 @@ function Companies() {
 
     useEffect(() => {
         fetchCompanies();
-    }, [])
+    }, [fetchCompanies])
 
     return (
         <div className="Companies">
